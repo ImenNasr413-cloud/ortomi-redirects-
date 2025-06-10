@@ -4,33 +4,24 @@
   <meta charset="UTF-8">
   <title>Pagamento riuscito</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 100px;
-      background-color: #f7f7f7;
-      color: #2e7d32;
-    }
-  </style>
   <script>
     window.onload = function () {
       const params = new URLSearchParams(window.location.search);
       const paymentId = params.get("paymentId");
-      const payerId = params.get("PayerID");
+      const payerId = params.get("PayerID"); // Attention : "PayerID", pas "payerId"
 
       if (paymentId && payerId) {
         const redirectUrl = `ortomi://paypal-success?paymentId=${paymentId}&payerId=${payerId}`;
         window.location.href = redirectUrl;
       } else {
-        document.body.innerHTML = "<h1>❌ Pagamento non valido</h1><p>Parametri mancanti.</p>";
+        document.body.innerHTML = "<h1>❌ Pagamento non valido</h1><p>Parametri mancanti</p>";
       }
     };
   </script>
 </head>
 <body>
   <h1>✅ Pagamento effettuato con successo</h1>
-  <p>Reindirizzamento all’app in corso...</p>
+  <p>Stai per essere reindirizzato all’app Ortomi...</p>
 </body>
 </html>
 
