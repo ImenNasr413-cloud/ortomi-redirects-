@@ -8,11 +8,19 @@
     window.onload = function () {
       const params = new URLSearchParams(window.location.search);
       const paymentId = params.get("paymentId");
-      const payerId = params.get("PayerID"); // Attention : "PayerID", pas "payerId"
+      const payerId = params.get("PayerID"); // PayPal l’envoie bien en majuscule
 
       if (paymentId && payerId) {
         const redirectUrl = `ortomi://paypal-success?paymentId=${paymentId}&payerId=${payerId}`;
-        window.location.href = redirectUrl;
+        console.log("✅ URL di reindirizzamento:", redirectUrl);
+
+        // Affiche un message sur la page avant redirection
+        document.body.innerHTML += "<p style='color:blue;'>⏳ Reindirizzamento tra 5 secondi...</p>";
+
+        // Attend 5 secondes avant de rediriger vers l'application
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 5000);
       } else {
         document.body.innerHTML = "<h1>❌ Pagamento non valido</h1><p>Parametri mancanti</p>";
       }
